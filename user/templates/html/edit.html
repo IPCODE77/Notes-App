@@ -1,0 +1,22 @@
+{% extends "html/base.html" %}
+{% block start %}
+<div class="container shadow-lg p-3 mb-5 bg-body-dark rounded mt-4" style="width: 700px; border: 1px solid gray;">
+    <h3 style=" text-align: center; color: crimson;">Notes</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Note Tittle</label>
+            <input type="text" value="{{note.note_tittle}}" name ="notetittle" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Note Description</label>
+            <textarea class="form-control" name="notedesc" id="exampleFormControlTextarea1" rows="3">{{note.note_desc}}</textarea>
+        </div>
+        <div>
+
+            <button type="" style="width: 100%;" class="btn btn-primary">Add Notes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

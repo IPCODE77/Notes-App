@@ -1,0 +1,79 @@
+{% extends "html/base.html" %}
+{% block start %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Notes App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" name="search" type="search" placeholder="Search Note" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container shadow-lg p-3 mb-5 bg-body-dark rounded mt-4" style="width: 700px; border: 1px solid gray;">
+    <h3 style=" text-align: center; color: crimson;">Notes</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Note Tittle</label>
+            <input type="text" name ="notetittle" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Note Description</label>
+            <textarea class="form-control" name="notedesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div>
+
+            <button type="" style="width: 100%;" class="btn btn-primary">Add Notes</button>
+        </div>
+    </form>
+</div>
+
+<div class="container d-flex flex-row mb-3 flex-wrap" style="margin-left: 12rem;">
+    {% for note in allnote %}
+
+
+            <div class="card shadow-lg p-3 mb-2 bg-body-dark rounded" style="width: 15rem; margin: 5px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{forloop.counter}}. {{note.note_tittle}}</h5>
+                    <p class="card-text">{{note.note_desc}}</p>
+                    <a href="/update/{{note.id}}" class="btn btn-primary">Edit</a>
+            <a href="/deleteitem/{{note.id}}" class="btn btn-warning">Delete</a>
+            </div>
+        </div>
+  {% endfor %}
+        </div>
+{% endblock %}
